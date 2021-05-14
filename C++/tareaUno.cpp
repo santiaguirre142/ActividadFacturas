@@ -43,73 +43,109 @@ std::string GETDATE() {
 
 };
 
-void GenerarFactura(int i, Factura arreglof[], Vendedor v1, Inventario i2, int Cant ) {
+void GenerarFactura(int i, Factura arregloF[], Vendedor v1, Inventario i2, int Cant ) {
 
     Factura f1;
     f1.Cve_Vendedor = v1.Cve_vendedor;
     f1.Cve_Articulo = i2.Cve_Articulo;
     f1.Cantidad = Cant;
     f1.NoFactura = "F" + GETDATE();
-    // arreglof[i];
+    //arregloF[i];
 
 };
 
-void inputUsuario() {
+void datosVendedor(Vendedor vend) {
 
-    string opcion;
+    Vendedor v1;
 
-    cout << "" << endl;
-    cout << "Super 'Doña Maria'" << endl << endl;
-    cout << "-----------------" << endl << endl;
-    cout << "Que desea agregar?" << endl << endl;
-    cout << "Escriba 'P' para producto" << "\t" << "Escriba 'V' para vendedor" << endl << endl; 
-    cin >> opcion;
-    cout << "" << endl;
+    string CVE;
+    string Nombre;
 
-    if (opcion == "P") {
-        cout << "Opcion Producto" << endl << endl;
-    } else if (opcion == "V") {
-        cout << "Opcion Vendedor" << endl << endl;
-    } else {
-        cout << "Opcion Invalida. Reiniciando Programa . . . " << endl;
-        inputUsuario();
-    }
+    cout << "---- CVE del vendedor: ----" << endl;
+    cin >> CVE;
+    cout << "---- Nombre del vendedor: ----" << endl;
+    cin >> CVE;
+
+    v1.Cve_vendedor = CVE;
+    v1.Nombre = Nombre;
 
 }
 
-void agregarProducto() {
+void datosProducto(Inventario prod) {
 
-}
+    Inventario p1;
 
-void agregarVendedor() {
-    
+    string CVE;
+    string Descripcion;
+    double Precio;
+    int Cantidad;
+
+    cout << "---- CVE del producto: ----" << endl;
+    cin >> CVE;
+    cout << "---- Descripcion del producto: ----" << endl;
+    cin >> Descripcion;
+    cout << "---- Precio del producto: ----" << endl;
+    cin >> Precio;
+    cout << "---- Cantidad: ----" << endl;
+    cin >> Cantidad;
+
+    p1.Cve_Articulo = CVE;
+    p1.Descripcion = Descripcion;
+    p1.Precio = Precio;
+
 }
 
 int main() {
 
-    inputUsuario();
+    int facturas;
+    int cantidad;
+    string opcion;
+    Factura arregloFact[facturas];
 
-    Vendedor arreglov[4];
-    Inventario arregloi[4];
-    Factura arreglof[5];
+    // Input Usuario
+    cout << "" << endl;
+    cout << "Super 'Doña Maria'" << endl << endl;
+    cout << "-----------------" << endl << endl;
+    cout << "Escriba 'G para generar factura" << "\t" << "\t" << "Escriba 'F' para imprimir facturas" << endl << endl; 
+    cin >> opcion;
+    cout << "" << endl;
 
-    // Variable v1
-    Vendedor v1 = {"v100", "Don Julio"};
-    Vendedor v2 = {"v200", "Dona Esperanza"};
-    arreglov[0] = v1;
-    arreglov[1] = v2;
+    // Opcion Generar Factura
+    if (opcion == "G") {   
 
-    // Variable i1, i2
-    Inventario i1 = {"i500", "Tornillo sin fin", 10.0};
-    Inventario i2 = {"i100", "Angulo de Ackerman", 20.0};
-    Inventario i3 = {"i500", "Piñon cremallera", 15.0};
-    arregloi[0] = i1;
-    arregloi[1] = i2;
-    arregloi[2] = i3;
+        // 1.- Se pide el numero de facturas
+        cout << "Cuantos facturas desea agregar?" << endl;
+        cin >> facturas;
 
-    int contadorFactura = 0;
+        // 2.- Loop que genera el numero de facturas pedidas
+        for (int i = 0; i < facturas; i = i + 1) {
+            Vendedor v1;
+            Inventario p1;
 
-    GenerarFactura(contadorFactura, arreglof, v1, i2, 32);
+            // 2.- Se piden los datos del vendedor
+            datosVendedor(v1);
+
+            // 3.- Se piden los datos del producto
+            datosProducto(p1);
+
+            // 4.- Se pide la cantidad de productos
+            cout << "---- Cantidad: ----" << endl;
+            cin >> cantidad;
+
+            // 5.- Se genera la factura 
+            //GenerarFactura(i, arregloFact, v1, p1, cantidad);
+
+        }
+
+    } else if (opcion == "F") {
+
+    } else {
+
+        cout << "Opcion Invalida. Apagando Programa . . . " << endl;
+        cout << "" << endl;
+        return 0;
+        
+    }
 
     return 0;
 
